@@ -1,4 +1,5 @@
 # free-time
+
 Node.js event planning app
 
 Models
@@ -18,12 +19,12 @@ Routes
 - POST Create event
 - GET Single event
 
-
 Views
 
-Home - User sees list of events, and button to create new event. Event Creation - user sees form for creating event. Event 
+Home - User sees list of events, and button to create new event. Event Creation - user sees form for creating event. Event
 
 User Model
+
 ```
 {
   name: {
@@ -43,7 +44,7 @@ User Model
     type: Boolean,
     default: false
   },
-  confirmationToken: {
+  token: {
     type: String
   }
 }
@@ -59,7 +60,7 @@ Event Model
     required: true
   },
   creator: {
-    type: ObjectID,
+    type: mongoose.Schema.Types.ObjectId,
     ref: user
   },
   locationName: {
@@ -97,7 +98,7 @@ Event Model
   },
   invitees: [
     {
-      type: ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: User
     }
   ]
@@ -107,7 +108,7 @@ Event Model
         type: String,
       },
       assignedTo: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: User
         default: null
       }
@@ -120,11 +121,11 @@ Comment Model
 
 ```
 creator: {
-  type: ObjectId,
+  type: mongoose.Schema.Types.ObjectId,
   ref: User
 },
 event: {
-  type: ObjectId
+  type: mongoose.Schema.Types.ObjectId
   ref: Event
 },
 content: {
@@ -136,4 +137,3 @@ pictureUrl: {
 }
 
 ```
-
