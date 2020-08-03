@@ -12,23 +12,23 @@ const schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  locationName: {
+  location: {
     type: String,
     required: true,
   },
-  location: {
-    coordinates: [
-      {
-        type: Number,
-        min: -180,
-        max: 180,
-      },
-    ],
-    type: {
-      type: String,
-      default: "Point",
-    },
-  },
+  // geo: {
+  //   coordinates: [
+  //     {
+  //       type: Number,
+  //       min: -180,
+  //       max: 180,
+  //     },
+  //   ],
+  //   type: {
+  //     type: String,
+  //     default: "Point",
+  //   },
+  // },
   dates: [
     {
       date: {
@@ -65,4 +65,4 @@ const schema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("User", schema);
+module.exports = mongoose.model("Event", schema);
