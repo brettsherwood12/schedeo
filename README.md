@@ -25,23 +25,81 @@ Home - User sees list of events, and button to create new event. Event Creation 
 
 User Model
 
-- name: String, required
-- email: String, required
-- hashedPassword: String, required
-- events: Array of ObjectIds, ref Event
-- active: Boolean, default false
-- confirmationToken: String, required, unique
+{
+  name: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true
+  },
+  passwordHash: {
+    type: String
+  },
+  active: {
+    type: Boolean
+    default: false
+  }
+  confirmationToken: {
+    type: String
+  }
+}
 
 Event Model
 
-- name: String, required
-- creator: ObjectID, required
-- locationName: String, required
-- location: GeoJSON
-- dates: Array of objects w/properties date = Date, votes = Number
-- description: String
-- pictureUrl: String
-- invitees: Array of ObjectIds, ref User
+{
+  name: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  creator: {
+    type: ObjectID,
+    ref: user
+  },
+  locationName: {
+    type: String
+    required: true
+  },
+  location: {
+    coordinates: [
+      {
+        type: Number,
+        min: -180,
+        max: 180
+      }
+    ],
+    type: {
+      type: String,
+      default: 'Point'
+    }
+  },
+  dates: [
+    {
+      date: {
+      type: Date,
+      },
+      votes: {
+        type: Number
+      }
+    }
+  ],
+  description: {
+    type: String
+  },
+  pictureUrl: {
+    type: String
+  },
+  invitees: [
+    {
+      type: ObjectId
+      ref: User
+    }
+  ]
+}
 
 Comment Model
 
