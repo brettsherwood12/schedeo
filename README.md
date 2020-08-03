@@ -24,7 +24,7 @@ Views
 Home - User sees list of events, and button to create new event. Event Creation - user sees form for creating event. Event 
 
 User Model
-
+```
 {
   name: {
     type: String,
@@ -40,16 +40,18 @@ User Model
     type: String
   },
   active: {
-    type: Boolean
+    type: Boolean,
     default: false
-  }
+  },
   confirmationToken: {
     type: String
   }
 }
+```
 
 Event Model
 
+```
 {
   name: {
     type: String,
@@ -95,15 +97,43 @@ Event Model
   },
   invitees: [
     {
-      type: ObjectId
+      type: ObjectId,
       ref: User
     }
   ]
+  tasks: [
+    {
+      description: {
+        type: String,
+      },
+      assignedTo: {
+        type: ObjectId,
+        ref: User
+        default: null
+      }
+    }
+  ]
 }
+```
 
 Comment Model
 
-- creator: ObjectId, ref User
-- content: String, required
-- event: ObjectId, ref Event
-- pictureUrl: String
+```
+creator: {
+  type: ObjectId,
+  ref: User
+},
+event: {
+  type: ObjectId
+  ref: Event
+},
+content: {
+  type: String,
+  required: true,
+},
+pictureUrl: {
+  type: String,
+}
+
+```
+
