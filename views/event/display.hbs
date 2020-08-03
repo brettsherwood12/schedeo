@@ -1,0 +1,57 @@
+{{#if user}}
+<nav>
+  <form method="POST" action="/events/{{ id }}/delete">
+    <button>Delete Event</button>
+  </form>
+  <a href="/profile">Profile</a>
+</nav>
+{{else}}
+  <a href="/authentication/sign-in">Sign In</a>
+  <a href="/authentication/sign-up">Sign Up</a>
+{{/if}}
+
+<div>
+  <div>
+    <h2>Event Name</h2>
+    <span>Location</span>
+    <p>Description</p>
+    <img src="" alt="">
+  </div>
+
+{{#if user}}
+  <div>
+    <div>
+      <p>Copy and share the link to invite people: link</p>
+    </div>
+    <div>
+      <a href="/events/{{id}}/list">View list</a>
+      <a href="/events/{{id}}/availabilities">View availabilities</a>
+    </div>
+  </div>
+</div>
+
+<div>
+  <form action="" method="POST">
+    <label for="first-date">{{date1}}</label>
+    <input type="checkbox" id="first-date" name="first-date">
+
+    <label for="second-date">{{date2}}</label>
+    <input type="checkbox" id="second-date" name="second-date">
+
+    <button>Submit dates</button>
+  </form>
+</div>
+
+<div>
+  <h3>Comments</h3>
+
+  <form action="" method="POST">
+    <label for="input-comment">Comments</label>
+    <input type="text" name="comment" id="input-comment" placeholder="Add a comment..." />
+
+    <button>Submit</button>
+  </form>
+</div>
+{{else}}
+<a href="/">Sign-in to join</a>
+{{/if}}

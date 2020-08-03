@@ -1,2 +1,23 @@
 <h1>User Profile</h1>
-<p>{{name}}</p>
+
+<form method="POST">
+  <label for="input-name">Name</label>
+  <input
+    id="input-name"
+    type="text"
+    placeholder="Name"
+    name="name"
+    value="{{ user.name }}"
+  >
+
+  <label for="input-email">Email</label>
+  <input
+    id="input-email"
+    type="email"
+    placeholder="Email"
+    name="email"
+    value="{{ user.email }}"
+  >
+  
+  <button>Edit Profile</button>
+</form>
