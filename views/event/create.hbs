@@ -1,0 +1,26 @@
+<h2>Create a new event</h2>
+
+<form action="/event/create" method="POST" enctype="multipart/form-data">
+  <label for="input-name">Event Name</label>
+  <input type="text" id="input-name" name="name" placeholder="Your Name" />
+
+  <label for="input-Location">Location</label>
+  <input type="text" id="input-location" name="location" placeholder="Event Location" />
+
+  <label for="input-description">Description</label>
+  <input type="text" name="description" id="input-description" placeholder="Event Description" />
+
+  <label for="input-file">Image</label>
+  <input type="file" name="image" id="input-image" placeholder="Event Image">
+
+  <label for="input-dates">Add a first date</label>
+  <input type="date" id="input-date" name="date">
+
+  <label for="input-dates">Add a second date</label>
+  <input type="date" id="input-date" name="date">
+
+  <label for="input-dates">Add a third date</label>
+  <input type="date" id="input-date" name="date">
+
+  <button>Create Event</button>
+</form>
