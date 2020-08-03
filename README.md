@@ -9,24 +9,28 @@ Models
 
 Routes
 
-- GET Home/event feed
 - GET Sign-up
 - POST Sign-up
 - GET Sign-in
 - POST Sign-in
+- GET Home/event feed
 - GET Create event
 - POST Create event
+- GET Single event
+
 
 Views
 
-
+Home - User sees list of events, and button to create new event. Event Creation - user sees form for creating event. Event 
 
 User Model
 
 - name: String, required
 - email: String, required
 - hashedPassword: String, required
-- events: array of ObjectIds, ref Event
+- events: Array of ObjectIds, ref Event
+- active: Boolean, default false
+- confirmationToken: String, required, unique
 
 Event Model
 
