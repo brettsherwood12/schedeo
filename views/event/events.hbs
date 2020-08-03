@@ -1,13 +1,18 @@
 <nav>
-  <a href="/events/create">Create a new event</a>
+  <a href="/event/create">Create a new event</a>
   <a href="/profile">Profile</a>
 </nav>
 
 {{!-- List of all of the users events --}}
 <div>
-  <a href="/events/{{id}}">
-  <h2>Event Name</h2>
-  <p>Description</p>
-  <span>Location</span>
-  </a>
+  {{#each events}}
+  <article>
+    <a href="/event/{{ _id }}">
+    <h2>{{ name }}</h2>
+    <p>{{ description }}</p>
+    <span>{{ location }}</span>
+    </a>
+  </article>
+  {{/each}}
 </div>
+

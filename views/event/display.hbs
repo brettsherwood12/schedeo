@@ -1,6 +1,6 @@
 {{#if user}}
 <nav>
-  <form method="POST" action="/events/{{ id }}/delete">
+  <form method="POST" action="/events/{{ _id }}/delete">
     <button>Delete Event</button>
   </form>
   <a href="/profile">Profile</a>
@@ -12,9 +12,9 @@
 
 <div>
   <div>
-    <h2>Event Name</h2>
-    <span>Location</span>
-    <p>Description</p>
+    <h2>{{ event.name }}</h2>
+    <span>{{ event.location }}</span>
+    <p>{{ event.description }}</p>
     <img src="" alt="">
   </div>
 
@@ -22,17 +22,18 @@
   <div>
     <div>
       <p>Copy and share the link to invite people: link</p>
+      <p></p>
     </div>
     <div>
-      <a href="/events/{{id}}/list">View list</a>
-      <a href="/events/{{id}}/availabilities">View availabilities</a>
+      <a href="/event/{{ event._id }}/list">View list</a>
+      <a href="/event/{{ event._id }}/availabilities">View availabilities</a>
     </div>
   </div>
 </div>
 
 <div>
   <form action="" method="POST">
-    <label for="first-date">{{date1}}</label>
+    <label for="first-date">{{event.dates.[0].date}}</label>
     <input type="checkbox" id="first-date" name="first-date">
 
     <label for="second-date">{{date2}}</label>
