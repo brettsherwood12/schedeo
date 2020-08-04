@@ -19,6 +19,7 @@ router.get('/create', (req, res, next) => {
 });
 
 router.post('/create', upload.single('image'), (req, res) => {
+  console.log(req.body);
   let url;
   if (req.file) {
     url = req.file.path;
