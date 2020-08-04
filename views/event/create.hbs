@@ -13,14 +13,18 @@
   <label for="input-file">Image</label>
   <input type="file" name="image" id="input-image" placeholder="Event Image">
 
-  <label for="input-date">Add a first date</label>
-  <input type="date" id="input-date" name="date[]">
-
-  <label for="input-date">Add a second date</label>
-  <input type="date" id="input-date" name="date[]">
-
-  <label for="input-date">Add a third date</label>
-  <input type="date" id="input-date" name="date[]">
+  <div id="inputFormRow">
+    <div class="input-group mb-3">
+      <input type="date" name="date[]" class="form-control m-input" placeholder="Enter title" autocomplete="off">
+      <div class="input-group-append">                
+        <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+      </div>
+    </div>
+  </div>
+  <div id="newRow"></div>
+  <button id="addRow" type="button" class="btn btn-info">Add a Date</button>
 
   <button>Create Event</button>
 </form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
