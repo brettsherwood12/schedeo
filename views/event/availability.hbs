@@ -5,3 +5,22 @@
 <p>Votes: {{ votes }}</p>
 <p>Voters: {{ voters.[0].name }}</p>
 {{/each}}
+
+<table>
+  <thead>
+    <tr>
+      <th>The person</th>
+      {{#each event.dates}}
+      <th>{{ dateHelper date "DD/MM/YYYY" }}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each event.dates}}
+      <tr>
+        <td>{{ voters.[0].name }}</td>
+        <td></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
