@@ -56,7 +56,9 @@ router.get("/", (req, res, next) => {
 router.get("/:id/tasks", (req, res, next) => {
   const id = req.params.id;
   Event.findById(id)
+    .populate("tasks.assignedTo")
     .then((event) => {
+      console.log(event);
       res.render("event/tasks", { event });
     })
     .catch((error) => {
@@ -64,12 +66,11 @@ router.get("/:id/tasks", (req, res, next) => {
     });
 });
 
-function inputTask(string) {}
-
 router.post("/:id/tasks", (req, res, next) => {
   const id = req.params.id;
   const { task } = req.body;
-  Event.findByIdAndUpdate(id, { $push: { tasks: { description: task, assignedTo: req.user } } })
+  Event.findByIdAndUpdate(id, { $push: { tasks: { assignedTo: req.user._id, description: task } } })
+
     .then(() => {
       res.redirect("back");
     })
