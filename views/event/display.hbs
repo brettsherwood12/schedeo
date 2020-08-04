@@ -21,8 +21,9 @@
 {{#if user}}
   <div>
     <div>
-      <p>Copy and share the link to invite people: link</p>
-      <p></p>
+      <p>Copy and share the link to invite people:</p>
+      <textarea id="textarea" >http://localhost:3000/event/{{ event._id }}</textarea>
+      <button id="button">Copy to clipboard</button>
     </div>
     <div>
       <a href="/event/{{ event._id }}/tasks">View tasks</a>
@@ -54,3 +55,14 @@
 {{else}}
 <a href="/">Sign-in to join</a>
 {{/if}}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  const textArea = document.getElementById('textarea')
+  const button = document.getElementById('button')
+  button.addEventListener('click', () => {
+    textarea.select();
+    document.execCommand('copy')
+  })
+</script>
