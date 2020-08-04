@@ -62,9 +62,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bindUserToViewLocals);
 
-app.use('/event', eventRouter);
 app.use('/', indexRouter);
 app.use('/authentication', authenticationRouter);
+app.use('/event', eventRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

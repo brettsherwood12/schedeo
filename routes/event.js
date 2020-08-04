@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-const { Router } = require("express");
+const { Router } = require('express');
 const router = new Router();
-const routeGuard = require("./../middleware/route-guard");
-const inviteGuard = require("./../middleware/invite-guard");
-const Event = require("../models/event");
-const { createTransport } = require("nodemailer");
-const multer = require("multer");
-const cloudinary = require("cloudinary");
-const multerStorageCloudinary = require("multer-storage-cloudinary");
+const routeGuard = require('./../middleware/route-guard');
+const inviteGuard = require('./../middleware/invite-guard');
+const Event = require('../models/event');
+const { createTransport } = require('nodemailer');
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+const multerStorageCloudinary = require('multer-storage-cloudinary');
 
 const storage = new multerStorageCloudinary.CloudinaryStorage({
-  cloudinary: cloudinary.v2,
+  cloudinary: cloudinary.v2
 });
 const upload = multer({ storage });
 
-router.get("/create", (req, res, next) => {
-  res.render("event/create");
+router.get('/create', (req, res, next) => {
+  res.render('event/create');
 });
 
 function getDates(arr) {
@@ -25,7 +25,7 @@ function getDates(arr) {
   }, []);
 }
 
-router.post("/create", upload.single("image"), (req, res) => {
+router.post('/create', upload.single('image'), (req, res) => {
   console.log(req.body);
   let url;
   if (req.file) {
@@ -39,61 +39,101 @@ router.post("/create", upload.single("image"), (req, res) => {
     dates: getDates(date),
     description,
     pictureUrl: url,
-    invitees: req.user,
-  }).then((event) => {
+    invitees: req.user
+  }).then(event => {
     console.log(event);
   });
 });
 
-router.get("/", routeGuard, (req, res, next) => {
+router.get('/', routeGuard, (req, res, next) => {
   Event.find()
-    .then((events) => {
-      res.render("event/events", { events });
+    .then(events => {
+      res.render('event/events', { events });
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
 
-router.get("/:id/tasks", (req, res, next) => {
+router.get('/:id/tasks', (req, res, next) => {
   const id = req.params.id;
   Event.findById(id)
-    .populate("tasks.assignedTo")
-    .then((event) => {
+    .populate('tasks.assignedTo')
+    .then(event => {
       console.log(event);
-      res.render("event/tasks", { event });
+      res.render('event/tasks', { event });
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
 
-router.post("/:id/tasks", (req, res, next) => {
+router.post('/:id/tasks', (req, res, next) => {
   const id = req.params.id;
   const { task } = req.body;
-  Event.findByIdAndUpdate(id, { $push: { tasks: { assignedTo: req.user._id, description: task } } })
+  Event.findByIdAndUpdate(id, {
+    $push: { tasks: { assignedTo: req.user._id, description: task } }
+  })
 
     .then(() => {
-      res.redirect("back");
+      res.redirect('back');
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
 
-router.get("/:id", inviteGuard, (req, res, next) => {
+router.get('/event/:id/availability', (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
-    .then((event) => {
+    .populate('dates.voters')
+    .then(event => {
+      res.render('event/availability', { event });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.post('/event/:id', (req, res, next) => {
+  const id = req.params.id;
+  const idDate = req.body.id;
+
+  for (let i = 0; i < idDate.length; i++) {
+    let parentEvent;
+    Event.findById(id)
+      .then(parent => {
+        parentEvent = parent;
+        let doc;
+        return (doc = parent.dates.id(idDate[i]));
+      })
+      .then(doc => {
+        doc.voters.push(req.user._id);
+        doc.votes++;
+        console.log(doc);
+        parentEvent.markModified(doc);
+        parentEvent.save();
+      })
+      .catch(error => {
+        next(error);
+      });
+  }
+});
+
+router.get('/:id', inviteGuard, (req, res, next) => {
+  const id = req.params.id;
+
+  Event.findById(id)
+    .then(event => {
       if (event) {
         console.log(event);
-        res.render("event/display", { event });
+        res.render('event/display', { event });
       } else {
         next();
       }
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
