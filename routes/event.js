@@ -18,6 +18,12 @@ router.get('/create', (req, res, next) => {
   res.render('event/create');
 });
 
+function getDates(arr) {
+  return arr.reduce((acc, date) => {
+    return [...acc, { date: new Date(date), votes: 0 }];
+  }, []);
+}
+
 router.post('/create', upload.single('image'), (req, res) => {
   console.log(req.body);
   let url;
@@ -29,11 +35,11 @@ router.post('/create', upload.single('image'), (req, res) => {
     name,
     creator: req.session.userId,
     location,
-    dates: { date: new Date(date), votes: 0 },
+    dates: getDates(date),
     description,
     pictureUrl: url
-  }).then(user => {
-    console.log(user);
+  }).then(event => {
+    console.log(event);
   });
 });
 
