@@ -42,6 +42,7 @@ router.post('/create', upload.single('image'), (req, res) => {
     invitees: req.user
   }).then(event => {
     console.log(event);
+    res.redirect('/');
   });
 });
 
@@ -53,6 +54,49 @@ router.get('/', routeGuard, (req, res, next) => {
     .catch(error => {
       next(error);
     });
+});
+
+router.get('/:id', inviteGuard, (req, res, next) => {
+  const id = req.params.id;
+
+  Event.findById(id)
+    .then(event => {
+      if (event) {
+        console.log(event);
+        res.render('event/display', { event });
+      } else {
+        next();
+      }
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.post('/:id', (req, res, next) => {
+  const id = req.params.id;
+  const idDate = req.body.id;
+
+  for (let i = 0; i < idDate.length; i++) {
+    let parentEvent;
+    Event.findById(id)
+      .then(parent => {
+        parentEvent = parent;
+        let doc;
+        return (doc = parent.dates.id(idDate[i]));
+      })
+      .then(doc => {
+        doc.voters.push(req.user._id);
+        doc.votes++;
+        console.log(doc);
+        parentEvent.markModified(doc);
+        parentEvent.save();
+        res.redirect('/');
+      })
+      .catch(error => {
+        next(error);
+      });
+  }
 });
 
 router.get('/:id/tasks', (req, res, next) => {
@@ -83,55 +127,13 @@ router.post('/:id/tasks', (req, res, next) => {
     });
 });
 
-router.get('/event/:id/availability', (req, res, next) => {
+router.get('/:id/availability', (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
     .populate('dates.voters')
     .then(event => {
       res.render('event/availability', { event });
-    })
-    .catch(error => {
-      next(error);
-    });
-});
-
-router.post('/event/:id', (req, res, next) => {
-  const id = req.params.id;
-  const idDate = req.body.id;
-
-  for (let i = 0; i < idDate.length; i++) {
-    let parentEvent;
-    Event.findById(id)
-      .then(parent => {
-        parentEvent = parent;
-        let doc;
-        return (doc = parent.dates.id(idDate[i]));
-      })
-      .then(doc => {
-        doc.voters.push(req.user._id);
-        doc.votes++;
-        console.log(doc);
-        parentEvent.markModified(doc);
-        parentEvent.save();
-      })
-      .catch(error => {
-        next(error);
-      });
-  }
-});
-
-router.get('/:id', inviteGuard, (req, res, next) => {
-  const id = req.params.id;
-
-  Event.findById(id)
-    .then(event => {
-      if (event) {
-        console.log(event);
-        res.render('event/display', { event });
-      } else {
-        next();
-      }
     })
     .catch(error => {
       next(error);
