@@ -73,7 +73,9 @@ router.post("/:id/tasks", (req, res, next) => {
     .then(() => {
       res.redirect("back");
     })
-    .catch((error) => {});
+    .catch((error) => {
+      next(error);
+    });
 });
 
 router.get("/:id", (req, res, next) => {
