@@ -1,0 +1,7 @@
+<h2>Check the polls!</h2>
+
+{{#each event.dates}}
+<p>Date: {{ dateHelper date "DD/MM/YYYY" }}</p>
+<p>Votes: {{ votes }}</p>
+<p>Voters: {{ voters.[0].name }}</p>
+{{/each}}

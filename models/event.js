@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User'
   },
   location: {
     type: String,
-    required: true,
+    required: true
   },
   // geo: {
   //   coordinates: [
@@ -32,38 +32,45 @@ const schema = new mongoose.Schema({
   dates: [
     {
       date: {
-        type: Date,
+        type: Date
       },
       votes: {
         type: Number,
-        default: 0,
+        default: 0
       },
-    },
+      voters: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          default: null
+        }
+      ]
+    }
   ],
   description: {
-    type: String,
+    type: String
   },
   pictureUrl: {
-    type: String,
+    type: String
   },
   invitees: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+      ref: 'User'
+    }
   ],
   tasks: [
     {
       description: {
-        type: String,
+        type: String
       },
       assignedTo: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        default: null,
-      },
-    },
-  ],
+        ref: 'User',
+        default: null
+      }
+    }
+  ]
 });
 
-module.exports = mongoose.model("Event", schema);
+module.exports = mongoose.model('Event', schema);

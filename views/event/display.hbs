@@ -25,8 +25,8 @@
       <p></p>
     </div>
     <div>
-      <a href="/event/{{ event._id }}/tasks">View list</a>
-      <a href="/event/{{ event._id }}/availabilities">View availabilities</a>
+      <a href="/event/{{ event._id }}/tasks">View tasks</a>
+      <a href="/event/{{ event._id }}/availability">View availabilities</a>
     </div>
   </div>
 </div>
@@ -34,8 +34,8 @@
 <div>
   <form action="" method="POST">
     {{#each event.dates}}
-      <label for="first-date">{{ dateHelper date "DD/MM/YYYY" }}</label>
-      <input type="checkbox" id="first-date" name="{{ _id }}">
+      <label for="date">{{ dateHelper date "DD/MM/YYYY" }}</label>
+      <input type="checkbox" id="date" name="id" value="{{ _id }}">
     {{/each}}
     <button>Submit dates</button>
   </form>
