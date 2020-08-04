@@ -3,6 +3,7 @@
 const { Router } = require("express");
 const router = new Router();
 const routeGuard = require("./../middleware/route-guard");
+const inviteGuard = require("./../middleware/invite-guard");
 const Event = require("../models/event");
 const { createTransport } = require("nodemailer");
 const multer = require("multer");
@@ -38,12 +39,13 @@ router.post("/create", upload.single("image"), (req, res) => {
     dates: getDates(date),
     description,
     pictureUrl: url,
+    invitees: req.user,
   }).then((event) => {
     console.log(event);
   });
 });
 
-router.get("/", (req, res, next) => {
+router.get("/", routeGuard, (req, res, next) => {
   Event.find()
     .then((events) => {
       res.render("event/events", { events });
@@ -79,7 +81,7 @@ router.post("/:id/tasks", (req, res, next) => {
     });
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", inviteGuard, (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
