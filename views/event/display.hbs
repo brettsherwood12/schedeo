@@ -33,12 +33,10 @@
 
 <div>
   <form action="" method="POST">
-    <label for="first-date">{{event.dates.[0].date}}</label>
-    <input type="checkbox" id="first-date" name="first-date">
-
-    <label for="second-date"></label>
-    <input type="checkbox" id="second-date" name="second-date">
-
+    {{#each event.dates}}
+      <label for="first-date">{{ dateHelper date "DD/MM/YYYY" }}</label>
+      <input type="checkbox" id="first-date" name="{{ _id }}">
+    {{/each}}
     <button>Submit dates</button>
   </form>
 </div>
