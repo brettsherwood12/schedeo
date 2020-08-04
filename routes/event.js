@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-const { Router } = require('express');
+const { Router } = require("express");
 const router = new Router();
-const routeGuard = require('./../middleware/route-guard');
-const Event = require('../models/event');
-const { createTransport } = require('nodemailer');
-const multer = require('multer');
-const cloudinary = require('cloudinary');
-const multerStorageCloudinary = require('multer-storage-cloudinary');
+const routeGuard = require("./../middleware/route-guard");
+const Event = require("../models/event");
+const { createTransport } = require("nodemailer");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const multerStorageCloudinary = require("multer-storage-cloudinary");
 
 const storage = new multerStorageCloudinary.CloudinaryStorage({
-  cloudinary: cloudinary.v2
+  cloudinary: cloudinary.v2,
 });
 const upload = multer({ storage });
 
-router.get('/create', (req, res, next) => {
-  res.render('event/create');
+router.get("/create", (req, res, next) => {
+  res.render("event/create");
 });
 
 function getDates(arr) {
@@ -24,7 +24,7 @@ function getDates(arr) {
   }, []);
 }
 
-router.post('/create', upload.single('image'), (req, res) => {
+router.post("/create", upload.single("image"), (req, res) => {
   console.log(req.body);
   let url;
   if (req.file) {
@@ -37,35 +37,58 @@ router.post('/create', upload.single('image'), (req, res) => {
     location,
     dates: getDates(date),
     description,
-    pictureUrl: url
-  }).then(event => {
+    pictureUrl: url,
+  }).then((event) => {
     console.log(event);
   });
 });
 
-router.get('/', (req, res, next) => {
+router.get("/", (req, res, next) => {
   Event.find()
-    .then(events => {
-      res.render('event/events', { events });
+    .then((events) => {
+      res.render("event/events", { events });
     })
-    .catch(error => {
+    .catch((error) => {
       next(error);
     });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get("/:id/tasks", (req, res, next) => {
+  const id = req.params.id;
+  Event.findById(id)
+    .then((event) => {
+      res.render("event/tasks", { event });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+function inputTask(string) {}
+
+router.post("/:id/tasks", (req, res, next) => {
+  const id = req.params.id;
+  const { task } = req.body;
+  Event.findByIdAndUpdate(id, { $push: { tasks: { description: task, assignedTo: req.user } } })
+    .then(() => {
+      res.redirect("back");
+    })
+    .catch((error) => {});
+});
+
+router.get("/:id", (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
-    .then(event => {
+    .then((event) => {
       if (event) {
         console.log(event);
-        res.render('event/display', { event });
+        res.render("event/display", { event });
       } else {
         next();
       }
     })
-    .catch(error => {
+    .catch((error) => {
       next(error);
     });
 });

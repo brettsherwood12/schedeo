@@ -1,0 +1,25 @@
+<h3>These people are going to take care of this stuff...</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>The person</th>
+      <th>The task</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each event.tasks}}
+      <tr>
+        <td>{{ assignedTo }}</td>
+        <td>{{ description }}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<h3> What can you add to make {{ event.name }} epic???</h3>
+
+<form action="/event/{{ event._id }}/tasks" method="POST">
+  <input type="text" name="task" placeholder="I will...">
+  <button>Send Tasks</button>
+</form>
