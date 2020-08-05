@@ -26,7 +26,6 @@ function getDates(arr) {
 }
 
 router.post("/create", upload.single("image"), (req, res, next) => {
-  console.log(req.body);
   let url;
   if (req.file) {
     url = req.file.path;
@@ -98,7 +97,6 @@ router.post("/:id", (req, res, next) => {
         .then((doc) => {
           doc.voters.push(req.user._id);
           doc.votes++;
-          console.log(doc);
           parentEvent.markModified(doc);
           parentEvent.save();
           res.redirect(`/event/${parentEvent._id}`);
