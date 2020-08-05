@@ -1,30 +1,31 @@
-<h2>Create a new event</h2>
+<h2 class="mb-3">Create a new event</h2>
 
-<form action="/event/create" method="POST" enctype="multipart/form-data">
+<form action="/event/create" method="POST" enctype="multipart/form-data" class="form-group">
   <label for="input-name">Event Name</label>
-  <input type="text" id="input-name" name="name" placeholder="Event Name" />
+  <input class="form-control mb-2" type="text" id="input-name" name="name" placeholder="Event Name" />
 
   <label for="input-Location">Location</label>
-  <input type="text" id="input-location" name="location" placeholder="Event Location" />
+  <input class="form-control mb-2" type="text" id="input-location" name="location" placeholder="Event Location" />
 
   <label for="input-description">Description</label>
-  <input type="text" name="description" id="input-description" placeholder="Event Description" />
+  <input class="form-control mb-2" type="text" name="description" id="input-description" placeholder="Event Description" />
 
   <label for="input-file">Image</label>
-  <input type="file" name="image" id="input-image" placeholder="Event Image">
+  <input class="form-control mb-2" type="file" name="image" id="input-image" placeholder="Event Image">
 
+      <label for="input-date">Possible dates</label>
   <div id="inputFormRow">
-    <div class="input-group mb-3">
-      <input type="date" name="date[]" class="form-control m-input">
+    <div class="input-group input-date-div mb-3">
+      <input type="date" id="input-date" name="date[]" class="form-control m-input">
       <div class="input-group-append">                
         <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
       </div>
     </div>
   </div>
   <div id="newRow"></div>
-  <button id="addRow" type="button" class="btn btn-info">Add a Date</button>
+  <button id="addRow" type="button" class="btn btn-info">Add another date</button>
 
-  <button>Create Event</button>
+  <button class="btn btn-outline-dark mt-3">Create Event</button>
 </form>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

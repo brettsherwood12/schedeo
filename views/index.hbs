@@ -1,35 +1,33 @@
 {{#if user}}
-  <nav>
-    <a href="/event/create">Create a new event</a>
-    <a href="/profile">Profile</a>
+  <nav class="inside-nav">
+    <a href="/event/create" class="btn btn-secondary create-btn">Create a new event</a>
+    <a href="/profile" class="align-self-center">Profile</a>
   </nav>
 
-  <div>
+  <div class="container mt-3">
     {{#each events}}
-    <article>
+    <article class="jumbotron">
       <a href="/event/{{ _id }}">
       <h2>{{ name }}</h2>
-      <p>{{ description }}</p>
-      <span>{{ location }}</span>
+      <span class="text-muted mb-2">Location: {{ location }}</span>
+      <p class="lead description">Description: {{ description }}</p>
       </a>
     </article>
     {{/each}}
   </div>
 {{else}}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <h1 class="display-1 text-center">Name</h1>
+<div class="container d-flex flex-column mt-5">
+  <div class="row d-flex flex-column mt-5">  
+    <div class="row justify-content-center mt-5">
+      <div class="col align-self-center mt-5">
+        <h1 class="display-1 text-center mb-5">Name</h1>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <a href="/authentication/sign-in" class="btn btn-outline-dark">Sign In</a>
-    </div>
-  </div>
     <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <a href="/authentication/sign-up" class="btn btn-outline-dark">Sign Up</a>
+      <div class="col-5 d-flex flex-column align-self-center">
+        <a href="/authentication/sign-in" class="btn btn-outline-dark btn-lg m-2">Sign In</a>
+        <a href="/authentication/sign-up" class="btn btn-outline-dark btn-lg m-2">Sign Up</a>
+      </div>
     </div>
   </div>
 </div>

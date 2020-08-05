@@ -1,8 +1,6 @@
-<h1>User Profile</h1>
-
-<form method="POST">
+<form method="POST" class="form-group">
   <label for="input-name">Name</label>
-  <input
+  <input class="form-control"
     id="input-name"
     type="text"
     placeholder="Name"
@@ -11,13 +9,14 @@
   >
 
   <label for="input-email">Email</label>
-  <input
+  <input class="form-control"
     id="input-email"
     type="email"
     placeholder="Email"
     name="email"
     value="{{ user.email }}"
   >
-  
-  <button>Edit Profile</button>
+  <div class="align-self-center">
+    <button class="btn btn-outline-dark mt-3">Edit Profile</button>
+  </div>
 </form>
