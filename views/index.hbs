@@ -1,4 +1,23 @@
-<h1>Name</h1>
+{{#if user}}
+  <nav>
+    <a href="/event/create">Create a new event</a>
+    <a href="/profile">Profile</a>
+  </nav>
 
-<a href="/authentication/sign-in">Sign In</a>
-<a href="/authentication/sign-up">Sign Up</a>
+  <div>
+    {{#each events}}
+    <article>
+      <a href="/event/{{ _id }}">
+      <h2>{{ name }}</h2>
+      <p>{{ description }}</p>
+      <span>{{ location }}</span>
+      </a>
+    </article>
+    {{/each}}
+  </div>
+{{else}}
+  <h1>Name</h1>
+
+  <a href="/authentication/sign-in">Sign In</a>
+  <a href="/authentication/sign-up">Sign Up</a>
+{{/if}}
