@@ -31,27 +31,33 @@ router.post(
 );
 
 router.get("/:id/sign-up", (req, res) => {
-  res.render("sign-up");
+  res.render("sign-up-display");
 });
 
 router.post(
   "/:id/sign-up",
   passport.authenticate("local-sign-up", {
-    successRedirect: "/",
-    failureRedirect: "/sign-up",
-  })
+    failureRedirect: "/sign-in",
+  }),
+  (req, res) => {
+    const id = req.params.id;
+    res.redirect(`/event/${id}`);
+  }
 );
 
-router.get("/sign-in", (req, res) => {
-  res.render("sign-in");
+router.get("/:id/sign-in", (req, res) => {
+  res.render("sign-in-display");
 });
 
 router.post(
-  "/sign-in",
+  "/:id/sign-in",
   passport.authenticate("local-sign-in", {
-    successRedirect: "/",
     failureRedirect: "/sign-in",
-  })
+  }),
+  (req, res) => {
+    const id = req.params.id;
+    res.redirect(`/event/${id}`);
+  }
 );
 
 router.post("/sign-out", (req, res) => {

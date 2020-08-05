@@ -1,9 +1,22 @@
 <a href="/event/{{ event._id }}">Go back to the event</a>
 <h2>Check the polls!</h2>
 
-{{#each event.dates}}
-<p>Date: {{ dateHelper date "DD/MM/YYYY" }}</p>
-<p>Votes: {{ votes }}</p>
-<p>Voters: {{ voters.[0].name }}</p>
-{{/each}}
-
+<div style="display: flex">
+  {{#each event.dates }}
+  <div>
+    <div class="card" style="width: 12rem; display: block;">
+      <div class="card-header">
+        {{ dateHelper date "DD/MM/YYYY" }}
+      </div>
+      <ul class="list-group list-group-flush">
+        {{#each voters}}
+          <li class="list-group-item">{{ name }}</li>
+        {{/each}}
+      </ul>
+      <div class="card-footer">
+        Total: {{ votes }}
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
