@@ -50,9 +50,9 @@
 <div>
   <h3>Comments</h3>
 
-  <form action="" method="POST">
+  <form action="/event/{{ event._id }}/delete" method="POST">
     <label for="input-comment">Comments</label>
-    <input type="text" name="comment" id="input-comment" placeholder="Add a comment..." />
+    <input type="text" name="content" id="input-comment" placeholder="Add a comment..." />
 
     <button>Submit</button>
   </form>
