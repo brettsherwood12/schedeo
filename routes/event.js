@@ -65,7 +65,6 @@ router.get("/:id", (req, res, next) => {
   Event.findById(id)
     .then((event) => {
       if (event) {
-        console.log(event);
         res.render("event/display", { event });
       } else {
         next();
@@ -107,7 +106,6 @@ router.get("/:id/tasks", (req, res, next) => {
   Event.findById(id)
     .populate("tasks.assignedTo")
     .then((event) => {
-      console.log(event);
       res.render("event/tasks", { event });
     })
     .catch((error) => {

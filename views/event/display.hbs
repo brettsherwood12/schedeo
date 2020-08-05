@@ -33,6 +33,12 @@
 </div>
 
 <div>
+  <form id="invisible-form" action="/{{ event._id }}/join">
+    <div id="append-to"></div>
+  </form>
+</div>
+
+<div>
   <form action="" method="POST">
     {{#each event.dates}}
       <label for="date">{{ dateHelper date "DD/MM/YYYY" }}</label>
@@ -64,5 +70,14 @@
   button.addEventListener('click', () => {
     textarea.select();
     document.execCommand('copy')
-  })
+  });
+
+  const invitees = {{{ helperJson event.invitees }}}
+  const userId = {{{ helperJson user._id }}}
+  if (userId && !invitees.includes(userId)) {
+    const joinButton = document.createElement("button");
+    joinButton.innerHTML = "JOIN EVENT";
+    const form = document.getElementById("invisible-form");
+    form.appendChild(joinButton);
+  }
 </script>
