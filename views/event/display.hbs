@@ -6,8 +6,8 @@
   <a href="/profile">Profile</a>
 </nav>
 {{else}}
-  <a href="/authentication/sign-in">Sign In</a>
-  <a href="/authentication/sign-up">Sign Up</a>
+  <a href="/authentication/{{ event._id }}/sign-in">Sign In</a>
+  <a href="/authentication/{{ event._id }}/sign-up">Sign Up</a>
 {{/if}}
 
 <div>
@@ -33,8 +33,7 @@
 </div>
 
 <div>
-  <form id="invisible-form" action="/{{ event._id }}/join">
-    <div id="append-to"></div>
+  <form id="invisible-form" action="/event/{{ event._id }}/join" method="POST">
   </form>
 </div>
 

@@ -160,4 +160,15 @@ router.get("/:id/availability", (req, res, next) => {
     });
 });
 
+router.post("/:id/join", (req, res, next) => {
+  const id = req.params.id;
+  Event.findByIdAndUpdate(id, { $push: { invitees: req.user._id } })
+    .then(() => {
+      res.redirect(`/event/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;
