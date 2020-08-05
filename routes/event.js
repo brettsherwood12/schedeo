@@ -25,7 +25,7 @@ function getDates(arr) {
   }, []);
 }
 
-router.post("/create", upload.single("image"), (req, res) => {
+router.post("/create", upload.single("image"), (req, res, next) => {
   console.log(req.body);
   let url;
   if (req.file) {
@@ -34,7 +34,7 @@ router.post("/create", upload.single("image"), (req, res) => {
   const { name, location, date, description } = req.body;
   Event.create({
     name,
-    creator: req.session.userId,
+    creator: req.user,
     location,
     dates: getDates(date),
     description,
@@ -43,16 +43,6 @@ router.post("/create", upload.single("image"), (req, res) => {
   })
     .then((event) => {
       res.redirect(`/event/${event._id}`);
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
-
-router.get("/", routeGuard, (req, res, next) => {
-  Event.find({ invitees: { $in: req.user._id } })
-    .then((events) => {
-      res.render("event/events", { events });
     })
     .catch((error) => {
       next(error);
@@ -78,27 +68,59 @@ router.get("/:id", (req, res, next) => {
 router.post("/:id", (req, res, next) => {
   const id = req.params.id;
   const idDate = req.body.id;
+  let parentEvent;
 
-  for (let i = 0; i < idDate.length; i++) {
-    let parentEvent;
+  if (typeof idDate === "string") {
     Event.findById(id)
       .then((parent) => {
         parentEvent = parent;
         let doc;
-        return (doc = parent.dates.id(idDate[i]));
+        return (doc = parent.dates.id(idDate));
       })
       .then((doc) => {
         doc.voters.push(req.user._id);
         doc.votes++;
-        console.log(doc);
         parentEvent.markModified(doc);
         parentEvent.save();
-        res.redirect("/");
+        res.redirect(`/event/${parentEvent._id}`);
       })
       .catch((error) => {
         next(error);
       });
+  } else {
+    for (let i = 0; i < idDate.length; i++) {
+      Event.findById(id)
+        .then((parent) => {
+          parentEvent = parent;
+          let doc;
+          return (doc = parent.dates.id(idDate[i]));
+        })
+        .then((doc) => {
+          doc.voters.push(req.user._id);
+          doc.votes++;
+          console.log(doc);
+          parentEvent.markModified(doc);
+          parentEvent.save();
+          res.redirect(`/event/${parentEvent._id}`);
+        })
+        .catch((error) => {
+          next(error);
+        });
+    }
   }
+});
+
+router.post("/:id/delete", routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  const userId = req.user;
+
+  Event.findOneAndDelete({ _id: id, creator: userId })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 router.get("/:id/tasks", (req, res, next) => {
@@ -119,7 +141,6 @@ router.post("/:id/tasks", (req, res, next) => {
   Event.findByIdAndUpdate(id, {
     $push: { tasks: { assignedTo: req.user._id, description: task } },
   })
-
     .then(() => {
       res.redirect("back");
     })

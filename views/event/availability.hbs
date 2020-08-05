@@ -1,3 +1,4 @@
+<a href="/event/{{ event._id }}">Go back to the event</a>
 <h2>Check the polls!</h2>
 
 {{#each event.dates}}
@@ -5,3 +6,22 @@
 <p>Votes: {{ votes }}</p>
 <p>Voters: {{ voters.[0].name }}</p>
 {{/each}}
+
+<table>
+  <thead>
+    <tr>
+      {{#each event.dates}}
+      <th>{{ dateHelper date "DD/MM/YYYY" }}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each event.dates.[].voters}}
+      <tr>
+      {{#each event.dates}}
+        <td>{{ voters.[0].name }}</td>
+      {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
