@@ -14,21 +14,32 @@ const storage = new multerStorageCloudinary.CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-router.post('/:id/comment', routeGuard, (req, res, next) => {
-  const { content } = req.body;
-  console.log(content);
+router.post(
+  '/:id/comment',
+  routeGuard,
+  upload.single('image'),
+  (req, res, next) => {
+    const id = req.params.id;
+    const { content } = req.body;
+    let url;
+    if (req.file) {
+      url = req.file.path;
+    }
 
-  Comment.create({
-    content,
-    creator: req.user
-  })
-    .then(post => {
-      res.redirect('/');
+    Comment.create({
+      event: id,
+      content,
+      creator: req.user,
+      pictureUrl: url
     })
-    .catch(error => {
-      next(error);
-    });
-});
+      .then(post => {
+        res.redirect(`/event/${id}`);
+      })
+      .catch(error => {
+        next(error);
+      });
+  }
+);
 
 router.get('/:id/tasks', (req, res, next) => {
   const id = req.params.id;

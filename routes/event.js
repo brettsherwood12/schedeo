@@ -3,8 +3,8 @@
 const { Router } = require('express');
 const router = new Router();
 const routeGuard = require('./../middleware/route-guard');
-const inviteGuard = require('./../middleware/invite-guard');
 const Event = require('../models/event');
+const Comment = require('../models/comment');
 const { createTransport } = require('nodemailer');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
@@ -50,11 +50,16 @@ router.post('/create', upload.single('image'), (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
+  let event;
 
   Event.findById(id)
-    .then(event => {
+    .then(data => {
+      event = data;
+      return Comment.find({ event: id }).populate('creator');
+    })
+    .then(comments => {
       if (event) {
-        res.render('event/display', { event });
+        res.render('event/display', { event, comments });
       } else {
         next();
       }

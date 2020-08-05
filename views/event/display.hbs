@@ -49,16 +49,29 @@
 
 <div>
   <h3>Comments</h3>
+    {{#each comments}}
 
-  <form action="/event/{{ event._id }}/comment" method="POST">
-    <label for="input-comment">Comments</label>
+  <span>{{ creator.name }} at {{ dateHelper creationDate "hh:mm, DD/MM/YYYY"}}</span>
+  <div class="post">
+    <p>{{ content }}</p>
+    {{#if pictureUrl}}
+      <img src="{{pictureUrl}}" />
+    {{/if}}
+  </div>
+    {{/each}}
+
+  <form action="/event/{{ event._id }}/comment" method="POST" enctype="multipart/form-data">
+    <label for="input-comment"></label>
     <input type="text" name="content" id="input-comment" placeholder="Add a comment..." />
+
+    <label for="input-file">Add an image</label>
+    <input class="form-control mb-2" type="file" name="image" id="input-image" placeholder="Comment Image">
 
     <button>Submit</button>
   </form>
 </div>
-{{else}}
-<a href="/">Sign-in to join</a>
+{{!-- {{else}}
+<a href="/">Sign-in to join</a> --}}
 {{/if}}
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
