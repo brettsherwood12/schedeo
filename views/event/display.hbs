@@ -1,28 +1,10 @@
-{{#if user}}
-<nav>
-  <form method="POST" action="/event/{{ event._id }}/delete">
-    <button>Delete Event</button>
-  </form>
-  <a href="/profile">Profile</a>
-</nav>
-{{else}}
-  <a href="/authentication/{{ event._id }}/sign-in">Sign In</a>
-  <a href="/authentication/{{ event._id }}/sign-up">Sign Up</a>
-{{/if}}
+{{> eventpartial }}
 
 <div>
   <div>
-    <h2>{{ event.name }}</h2>
-    <span>{{ event.location }}</span>
-    <p>{{ event.description }}</p>
-    <img src="{{ event.pictureUrl }}" alt="">
-  </div>
-
-{{#if user}}
-  <div>
     <div>
       <p>Copy and share the link to invite people:</p>
-      <textarea id="textarea" >http://localhost:3000/event/{{ event._id }}</textarea>
+      <textarea id="textarea" >http://localhost:3000/event/{{ event._id }}/join</textarea>
       <button id="button">Copy to clipboard</button>
     </div>
     <div>
@@ -30,11 +12,6 @@
       <a href="/event/{{ event._id }}/availability">View availabilities</a>
     </div>
   </div>
-</div>
-
-<div>
-  <form id="invisible-form" action="/event/{{ event._id }}/join" method="POST">
-  </form>
 </div>
 
 <div>
@@ -70,11 +47,6 @@
     <button>Submit</button>
   </form>
 </div>
-{{!-- {{else}}
-<a href="/">Sign-in to join</a> --}}
-{{/if}}
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
   const textArea = document.getElementById('textarea')
@@ -83,14 +55,4 @@
     textarea.select();
     document.execCommand('copy')
   });
-
-  const invitees = {{{ helperJson event.invitees }}}
-  const userId = {{{ helperJson user._id }}}
-  if (userId && !invitees.includes(userId)) {
-    const joinButton = document.createElement("button");
-    joinButton.innerHTML = "JOIN EVENT";
-    const form = document.getElementById("invisible-form");
-    form.appendChild(joinButton);
-  }
-
 </script>

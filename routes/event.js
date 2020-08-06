@@ -99,6 +99,18 @@ router.post("/create", upload.single("image"), (req, res, next) => {
     });
 });
 
+router.get("/myevents", (req, res, next) => {
+  const userId = req.user._id;
+
+  Event.find({ creator: userId })
+    .then((events) => {
+      res.render("event/my-events", { events });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.get("/:id", (req, res, next) => {
   const id = req.params.id;
   let event;
@@ -166,11 +178,23 @@ router.post("/:id", (req, res, next) => {
 
 router.post("/:id/delete", routeGuard, (req, res, next) => {
   const id = req.params.id;
-  const userId = req.user;
+  const userId = req.user._id;
 
   Event.findOneAndDelete({ _id: id, creator: userId })
     .then(() => {
       res.redirect("/");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.get("/:id/join", (req, res, next) => {
+  const id = req.params.id;
+
+  Event.findById(id)
+    .then((event) => {
+      res.render("event/join", { event });
     })
     .catch((error) => {
       next(error);

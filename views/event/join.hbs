@@ -1,0 +1,15 @@
+{{> eventpartial }}
+
+{{#if user}}
+<div>
+  <form action="/event/{{ event._id }}/join" method="POST">
+    <button>Join Event!</button>
+  </form>
+</div>
+{{else}}
+<div>
+  <p>You have to be registered to join the event!</p>
+  <a href="/authentication/{{ event._id }}/sign-in">Sign In</a>
+  <a href="/authentication/{{ event._id }}/sign-up">Sign Up</a>
+</div>
+{{/if}}
