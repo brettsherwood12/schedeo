@@ -20,13 +20,48 @@ router.get("/create", (req, res, next) => {
   res.render("event/create");
 });
 
-function getPhoto(searchTerm) {
+/*function getPhoto(searchTerm) {
   //const url = `https://api.unsplash.com/photos?clientid=${process.env.UNSPLASH_ACCESS_KEY}&orientation=landscape&query=${searchTerm}`;
-  const url = "https://jsonplaceholder.typicode.com/posts/1";
-  axios.get(url).then((response) => {
-    console.log(response);
+  //const url = "https://jsonplaceholder.typicode.com/posts/1";
+  const url = `https://api.pexels.com/v1/search?perpage=5&query=${searchTerm}`;
+  axios
+    .get(url, {
+      headers: {
+        Authorization: "563492ad6f91700001000001b2749e1f482b4975bb9bc7d109ddb87a",
+      },
+    })
+    .then((response) => {
+      for (let photo of response.data.photos) {
+        if (photo.width > photo.height) {
+          return photo.url;
+        }
+        continue;
+      }
+    });
+}*/
+
+const getPhoto = (searchTerm) => {
+  return new Promise((resolve, reject) => {
+    const url = `https://api.pexels.com/v1/search?perpage=5&query=${searchTerm}`;
+    axios
+      .get(url, {
+        headers: {
+          Authorization: "563492ad6f91700001000001b2749e1f482b4975bb9bc7d109ddb87a",
+        },
+      })
+      .then((response) => {
+        for (let photo of response.data.photos) {
+          console.log("im running");
+          if (photo.width > photo.height) {
+            console.log("inside of function", photo.url);
+            resolve(photo.url);
+          }
+          continue;
+        }
+      })
+      .catch((error) => reject(error));
   });
-}
+};
 
 function getDates(arr) {
   return arr.reduce((acc, date) => {
@@ -40,7 +75,12 @@ router.post("/create", upload.single("image"), (req, res, next) => {
   if (req.file) {
     url = req.file.path;
   } else {
-    getPhoto(name);
+    getPhoto(name)
+      .then((photo) => {
+        url = photo;
+        console.log(url);
+      })
+      .catch((error) => next(error));
   }
   Event.create({
     name,
