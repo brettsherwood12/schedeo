@@ -1,57 +1,53 @@
+<nav class="navbar navbar-light">
+</nav>
+
 {{> eventpartial }}
 
-<div>
-  <div>
-    <div>
-              <p>Copy and share the link to invite people:</p>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-                    <button class="btn btn-outline-dark mt-3" id="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-  <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-</svg></button>
-            </span>
-          </div>
-          <textarea class="form-control" id="textarea">https://schedeo.herokuapp.com/event/{{ event._id }}/join</textarea>
-        </div>
-
+<div class="mt-1">
+  <p class="lead text-right">Copy and share the link to invite people:</p>
+  <div class="input-group justify-content-end">
+    <div class="input-group-prepend">
+      <span class="input-group-text">
+        <button class="btn btn-outline-dark" id="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+        </svg></button>
+      </span>
     </div>
-    <div>
-      <a href="/event/{{ event._id }}/tasks">View tasks</a>
-      <a href="/event/{{ event._id }}/availability">View availabilities</a>
-    </div>
+    <textarea class="form-control" id="textarea">https://schedeo.herokuapp.com/event/{{ event._id }}/join</textarea>
   </div>
 </div>
 
 <div>
-  <form action="" method="POST">
+  <h2 class="display-5 mb-3">Vote on your dates:</h2>
+  <form method="POST">
     {{#each event.dates}}
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <div class="input-group-text">
-      <input class="mr-3" type="checkbox" id="date {{ _id }}" name="id" value="{{ _id }}">
-      <label for="date {{ _id }}">{{ dateHelper date "DD/MM/YYYY" }}</label>
-    </div>
-  </div>
-</div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text alert alert-success">
+            <label class="dates d-flex container-date align-items-baseline mr-5" for="date {{ _id }}">
+              {{ dateHelper date "DD/MM/YYYY" }}
+              <input type="checkbox" id="date {{ _id }}" name="id" value="{{ _id }}">
+              <span class="checkmark mt-1"></span>
+            </label>
+          </div>
+        </div>
+      </div>
     {{/each}}
     <button class="btn btn-outline-dark mt-3">Submit dates</button>
   </form>
 </div>
 
-
-
-<div>
-  <h3>Comments</h3>
+<div class="mt-5">
+  <h2 class="display-5 mb-3">Comments</h2>
     {{#each comments}}
-  <span>{{ creator.name }} at {{ dateHelper creationDate "hh:mm, DD/MM/YYYY"}}</span>
-  <div class="post">
-    <p>{{ content }}</p>
+      <div class="comment jumbotron">
+      <span class="lead">{{ creator.name }} at {{ dateHelper creationDate "hh:mm, DD/MM/YYYY"}}:</span>
+      <p class="lead">{{ content }}</p>
     {{#if pictureUrl}}
-      <img src="{{pictureUrl}}" />
+      <img src="{{pictureUrl}}" class="img-fluid rounded comment-image"/>
     {{/if}}
-  </div>
+      </div>
     {{/each}}
 
   <form action="/event/{{ event._id }}/comment" class="form-group" method="POST" enctype="multipart/form-data">
@@ -70,8 +66,8 @@
   </form>
 </div>
 
-
-<script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script type="application/javascript">
   const textArea = document.getElementById('textarea')
   const button = document.getElementById('button')
   button.addEventListener('click', () => {
@@ -79,4 +75,9 @@
     document.execCommand('copy');
     textarea.deselect();
   });
+
+  $('input[type="file"]').change(function(e){
+      var fileName = e.target.files[0].name;
+      $('.custom-file-label').html(fileName);
+    });
 </script>

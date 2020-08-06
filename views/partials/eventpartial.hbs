@@ -1,9 +1,14 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-2 jumbotron">
+  <span class="text-muted">Event by: {{ event.creator.name }}</span>
+  <div class="row mt-2">
     <div class="col">
     <h2>{{ event.name }}</h2>
     <span class="text-muted mb-2">Location: {{ event.location }}</span>
     <p class="lead description">Description: {{ event.description }}</p>
+    <p><a href="/event/{{ event._id }}/tasks">View tasks</a></p>
+    <p>
+    <a href="/event/{{ event._id }}/availability">View availabilities</a>
+    </p>
     </div>
     <div class="col">
     <img src="{{ event.pictureUrl }}" alt="{{ event.name }}" class="img-fluid rounded float-right event-image">

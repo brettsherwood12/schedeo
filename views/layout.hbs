@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body>
+  {{#if user}}
     <nav class="navbar navbar-light" style="background-color: #E9ECEF;">
-      {{#if user}}
       <div class="align-self-start">
         <a href="/">{{user.name}}'s Events</a>
         <a href="/profile">Profile</a>
@@ -17,8 +17,8 @@
         <form action="/authentication/sign-out" method="POST" class="align-self-end">
           <button class="btn btn-danger">Sign Out</button>
         </form>
-      {{/if}}
     </nav>
+  {{/if}}
       <div class="container">
         {{{body}}}
       </div>
