@@ -20,26 +20,6 @@ router.get("/create", (req, res, next) => {
   res.render("event/create");
 });
 
-/*function getPhoto(searchTerm) {
-  //const url = `https://api.unsplash.com/photos?clientid=${process.env.UNSPLASH_ACCESS_KEY}&orientation=landscape&query=${searchTerm}`;
-  //const url = "https://jsonplaceholder.typicode.com/posts/1";
-  const url = `https://api.pexels.com/v1/search?perpage=5&query=${searchTerm}`;
-  axios
-    .get(url, {
-      headers: {
-        Authorization: "563492ad6f91700001000001b2749e1f482b4975bb9bc7d109ddb87a",
-      },
-    })
-    .then((response) => {
-      for (let photo of response.data.photos) {
-        if (photo.width > photo.height) {
-          return photo.url;
-        }
-        continue;
-      }
-    });
-}*/
-
 const getPhoto = (searchTerm) => {
   return new Promise((resolve, reject) => {
     const url = `https://api.pexels.com/v1/search?perpage=5&query=${searchTerm}`;
