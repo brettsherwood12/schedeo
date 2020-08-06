@@ -23,29 +23,13 @@ a:hover,
 a:active,
 a:visited,
 a:focus {
-  text-decoration: underline;
+  text-decoration: none;
   color: inherit;
 }
 
-// a {
-//   color: inherit;
-//   text-decoration: none;
-// }
-
 nav {
-  display: flex;
-  a,
-  button {
-    color: inherit;
-    text-decoration: none;
-    padding: 1em 0;
-    border: 0;
-    &:not(:last-child) {
-      margin-right: 1em;
-    }
-    &:first-child {
-      margin-right: auto;
-    }
+  a {
+    margin-right: 1em;
   }
 }
 
@@ -55,36 +39,11 @@ h3,
 p {
   margin: 0;
   line-height: inherit;
-  &:not(:last-child) {
-    //  margin-bottom: 1rem;
-  }
 }
-
-// img {
-//   width: 100%;
-//   max-width: 100%;
-// }
 
 form {
   display: flex;
   flex-direction: column;
-}
-
-// input,
-// textarea,
-// button,
-// .btn {
-//   padding: 1em;
-//   // border: 1px solid $grey;
-//   border-radius: 0;
-//   margin-bottom: 1em;
-//   font: inherit;
-//   //color: inherit;
-//   //background-color: transparent;
-// }
-
-.inside-nav {
-  height: 40px;
 }
 
 h2 {
@@ -96,14 +55,6 @@ h2 {
 }
 
 article {
-  a,
-  a:hover,
-  a:active,
-  a:visited,
-  a:focus {
-    text-decoration: none;
-    color: inherit;
-  }
   span {
     line-height: normal;
     font-size: 0.6em;
@@ -112,6 +63,7 @@ article {
     font-size: 0.8em;
   }
 }
+
 .jumbotron {
   padding: 1em;
 }
@@ -122,17 +74,9 @@ nav {
   }
 }
 
-.create-btn {
-  color: white;
-}
-
 article {
   display: flex;
   justify-content: space-between;
-}
-
-#magic {
-  display: none;
 }
 
 .delete-btn {

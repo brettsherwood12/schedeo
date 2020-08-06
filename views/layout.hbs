@@ -3,16 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>{{title}}</title>
+    <title>Schedeo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body>
-    <nav>
+    <nav class="navbar navbar-light" style="background-color: #E9ECEF;">
       {{#if user}}
+      <div class="align-self-start">
         <a href="/">{{user.name}}'s Events</a>
         <a href="/profile">Profile</a>
-        <form action="/authentication/sign-out" method="POST">
+      </div>
+        <form action="/authentication/sign-out" method="POST" class="align-self-end">
           <button class="btn btn-danger">Sign Out</button>
         </form>
       {{/if}}
