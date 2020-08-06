@@ -1,7 +1,6 @@
 {{#if user}}
 {{> navbar }}
 
-{{#if events}}
   <div class="container mt-3">
     {{#each events}}
     <a href="/event/{{ _id }}">
@@ -16,7 +15,7 @@
     </a>
     {{/each}}
   </div>
-{{else}}
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-6 d-flex flex-column align-self-center">
