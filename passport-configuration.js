@@ -59,13 +59,14 @@ passport.use(
         })
         .then((user) => {
           callback(null, user);
+          return user;
         })
-        .then(() => {
+        .then((user) => {
           transport.sendMail({
             from: process.env.NODEMAILER_EMAIL,
-            to: process.env.NODEMAILER_EMAIL,
+            to: user.email,
             subject: "User signed up successfully",
-            text: "Welcome",
+            text: `Hi ${user.name}, thank you for signing up with Schedeo.`,
           });
         })
         .catch((error) => {

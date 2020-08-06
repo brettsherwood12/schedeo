@@ -1,12 +1,11 @@
 "use strict";
 
-const { Router, json } = require("express");
+const { Router } = require("express");
 const router = new Router();
 const routeGuard = require("./../middleware/route-guard");
 const Event = require("../models/event");
 const Comment = require("../models/comment");
 const axios = require("axios");
-const { createTransport } = require("nodemailer");
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const multerStorageCloudinary = require("multer-storage-cloudinary");
@@ -16,28 +15,17 @@ const storage = new multerStorageCloudinary.CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-router.get("/create", (req, res, next) => {
+router.get("/create", routeGuard, (req, res, next) => {
   res.render("event/create");
 });
 
 const getPhoto = (searchTerm) => {
   return new Promise((resolve, reject) => {
-    const url = `https://api.pexels.com/v1/search?perpage=5&query=${searchTerm}`;
+    const url = `https://api.unsplash.com/photos/random?client_id=zq1-YHr3N7i2gMEETHfiypJFZBGdPjj29Z943M8gDMc&orientation=landscape&query=party`;
     axios
-      .get(url, {
-        headers: {
-          Authorization: "563492ad6f91700001000001b2749e1f482b4975bb9bc7d109ddb87a",
-        },
-      })
+      .get(url)
       .then((response) => {
-        for (let photo of response.data.photos) {
-          console.log("im running");
-          if (photo.width > photo.height) {
-            console.log("inside of function", photo.url);
-            resolve(photo.url);
-          }
-          continue;
-        }
+        resolve(response.data.urls.regular);
       })
       .catch((error) => reject(error));
   });
@@ -49,18 +37,13 @@ function getDates(arr) {
   }, []);
 }
 
-router.post("/create", upload.single("image"), (req, res, next) => {
+router.post("/create", routeGuard, upload.single("image"), async (req, res, next) => {
   const { name, location, date, description } = req.body;
   let url;
   if (req.file) {
     url = req.file.path;
   } else {
-    getPhoto(name)
-      .then((photo) => {
-        url = photo;
-        console.log(url);
-      })
-      .catch((error) => next(error));
+    url = await getPhoto();
   }
   Event.create({
     name,
@@ -79,9 +62,8 @@ router.post("/create", upload.single("image"), (req, res, next) => {
     });
 });
 
-router.get("/myevents", (req, res, next) => {
+router.get("/myevents", routeGuard, (req, res, next) => {
   const userId = req.user._id;
-
   Event.find({ creator: userId })
     .then((events) => {
       res.render("event/my-events", { events });
@@ -91,10 +73,9 @@ router.get("/myevents", (req, res, next) => {
     });
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", routeGuard, (req, res, next) => {
   const id = req.params.id;
   let event;
-
   Event.findById(id)
     .then((data) => {
       event = data;
@@ -112,11 +93,10 @@ router.get("/:id", (req, res, next) => {
     });
 });
 
-router.post("/:id", (req, res, next) => {
+router.post("/:id", routeGuard, (req, res, next) => {
   const id = req.params.id;
   const idDate = req.body.id;
   let parentEvent;
-
   if (typeof idDate === "string") {
     Event.findById(id)
       .then((parent) => {
@@ -181,7 +161,7 @@ router.get("/:id/join", (req, res, next) => {
     });
 });
 
-router.post("/:id/join", (req, res, next) => {
+router.post("/:id/join", routeGuard, (req, res, next) => {
   const id = req.params.id;
   Event.findByIdAndUpdate(id, { $push: { invitees: req.user._id } })
     .then(() => {
