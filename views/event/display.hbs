@@ -23,8 +23,8 @@
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     <div class="input-group-text">
-      <input class="mr-3" type="checkbox" id="date" name="id" value="{{ _id }}">
-      <label for="date">{{ dateHelper date "DD/MM/YYYY" }}</label>
+      <input class="mr-3" type="checkbox" id="date {{ _id }}" name="id" value="{{ _id }}">
+      <label for="date {{ _id }}">{{ dateHelper date "DD/MM/YYYY" }}</label>
     </div>
   </div>
 </div>
