@@ -16,10 +16,10 @@ const schema = new mongoose.Schema({
   passwordHash: {
     type: String,
   },
-  active: {
-    type: Boolean,
-    default: false,
-  },
+  // active: {
+  //   type: Boolean,
+  //   default: false,
+  // },
   token: {
     type: String,
   },

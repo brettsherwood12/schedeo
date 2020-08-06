@@ -13,7 +13,7 @@
 </svg></button>
             </span>
           </div>
-          <textarea class="form-control" id="textarea">http://localhost:3000/event/{{ event._id }}/join</textarea>
+          <textarea class="form-control" id="textarea">https://schedeo.herokuapp.com/event/{{ event._id }}/join</textarea>
         </div>
 
     </div>
@@ -76,6 +76,7 @@
   const button = document.getElementById('button')
   button.addEventListener('click', () => {
     textarea.select();
-    document.execCommand('copy')
+    document.execCommand('copy');
+    textarea.deselect();
   });
 </script>

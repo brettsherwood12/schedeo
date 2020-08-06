@@ -1,11 +1,18 @@
-<a href="/event/{{ event._id }}">Go back to the event</a>
-<h3>These people are going to take care of this stuff...</h3>
+<a href="/event/{{ event._id }}">Go back</a>
 
-<table>
+
+<p>How can you help make {{ event.name }} epic?</p>
+<form action="/event/{{ event._id }}/tasks" method="POST">
+  <input type="text" name="task" placeholder="I will...">
+  <button class="btn btn-outline-dark mt-3">Make it happen</button>
+</form>
+
+<p>Who is going to do what...</p>
+<table class="table">
   <thead>
     <tr>
-      <th>The person</th>
-      <th>The task</th>
+      <th>Who</th>
+      <th>What</th>
     </tr>
   </thead>
   <tbody>
@@ -18,9 +25,3 @@
   </tbody>
 </table>
 
-<h3> What can you add to make {{ event.name }} epic???</h3>
-
-<form action="/event/{{ event._id }}/tasks" method="POST">
-  <input type="text" name="task" placeholder="I will...">
-  <button>Send Tasks</button>
-</form>
