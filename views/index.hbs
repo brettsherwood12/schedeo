@@ -1,18 +1,32 @@
 {{#if user}}
 {{> navbar }}
 
+{{#if events}}
   <div class="container mt-3">
     {{#each events}}
-    <article class="jumbotron">
-      <a href="/event/{{ _id }}">
-      <h2>{{ name }}</h2>
-      <span class="text-muted mb-2">Location: {{ location }}</span>
-      <p class="lead description">Description: {{ description }}</p>
-      </a>
-      <img src="{{ pictureUrl }}" alt="">
-    </article>
+    <a href="/event/{{ _id }}">
+      <article class="jumbotron">
+        <div>
+            <h2>{{ name }}</h2>
+            <span class="text-muted mb-2">Location: {{ location }}</span>
+            <p class="lead description">Description: {{ description }}</p>
+        </div>
+            <img src="{{ pictureUrl }}" alt="" class="img-fluid rounded home-image float-right">
+      </article>
+    </a>
     {{/each}}
   </div>
+{{else}}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-6 d-flex flex-column align-self-center">
+      <h2 class="text-center mb-3">You don't have any events! Start adding some!</h2>
+      <a href="/event/create" class="btn btn-secondary create-btn">Create a new event</a>
+    </div>
+  </div>
+</div>
+{{/if}}
+
 {{else}}
 {{> home }}
 {{/if}}

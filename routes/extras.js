@@ -41,7 +41,7 @@ router.post(
   }
 );
 
-router.get('/:id/tasks', (req, res, next) => {
+router.get('/:id/tasks', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Event.findById(id)
     .populate('tasks.assignedTo')
@@ -53,7 +53,7 @@ router.get('/:id/tasks', (req, res, next) => {
     });
 });
 
-router.post('/:id/tasks', (req, res, next) => {
+router.post('/:id/tasks', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const { task } = req.body;
   Event.findByIdAndUpdate(id, {
@@ -67,7 +67,7 @@ router.post('/:id/tasks', (req, res, next) => {
     });
 });
 
-router.get('/:id/availability', (req, res, next) => {
+router.get('/:id/availability', routeGuard, (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
