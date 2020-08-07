@@ -1,15 +1,29 @@
-{{> eventpartial }}
+<div class="container mt-2 jumbotron light-blue">
+  <span class="text-muted">Event by: {{ event.creator.name }}</span>
+  <div class="row mt-2">
+    <div class="col">
+    <h2 class="event-name">{{ event.name }}</h2>
+    <span class="text-muted mb-2">Location: {{ event.location }}</span>
+    <p class="description mb-3">Description: {{ event.description }}</p>
+    </div>
+    <div class="col">
+    <img src="{{ event.pictureUrl }}" alt="{{ event.name }}" class="img-fluid rounded float-right">
+    </div>
+  </div>
+</div>
 
 {{#if user}}
 <div>
   <form action="/event/{{ event._id }}/join" method="POST">
-    <button>Join Event!</button>
+    <button class="btn orange text-white">Join Event!</button>
   </form>
 </div>
 {{else}}
 <div>
+  <div class="justify-content-center align-items-center">
   <p>You have to be registered to join the event!</p>
-  <a href="/authentication/{{ event._id }}/sign-in">Sign In</a>
-  <a href="/authentication/{{ event._id }}/sign-up">Sign Up</a>
+  <a href="/authentication/{{ event._id }}/sign-in" class="btn btn-outline-dark mt-3">Sign In</a>
+  <a href="/authentication/{{ event._id }}/sign-up" class="btn btn-outline-dark mt-3">Sign Up</a>
+  </div>
 </div>
 {{/if}}
