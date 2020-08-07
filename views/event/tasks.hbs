@@ -1,16 +1,10 @@
 <nav class="navbar navbar-light">
-  <a class="btn btn-secondary" href="/event/{{ event._id }}">Back</a>
+  <a class="btn btn-light" href="/event/{{ event._id }}">Back</a>
 </nav>
 
-
-
-<p>How can you help make {{ event.name }} epic?</p>
-<form action="/event/{{ event._id }}/tasks" method="POST">
-  <input type="text" name="task" placeholder="I will...">
-  <button class="btn btn-outline-dark mt-3">Make it happen</button>
-</form>
-
-<p>Who is going to do what...</p>
+<div class="mt-3 mb-5">
+<p class="p-tasks">Who is going to do what?</p>
+<div class="table-container">
 <table class="table">
   <thead>
     <tr>
@@ -27,4 +21,15 @@
     {{/each}}
   </tbody>
 </table>
+</div>
 
+<p class="p-tasks">How can you make {{ event.name }} even better?</p>
+<form action="/event/{{ event._id }}/tasks" method="POST" class="form-group form-row">
+  <div class="col-6">
+    <input class="form-control mb-2" type="text" name="task" placeholder="I will...">
+  </div>
+  <div class="col">
+        <button class="btn btn-outline-dark mt-3">Make It Happen</button>
+    </div>
+</form>
+</div>
