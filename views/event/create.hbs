@@ -1,40 +1,44 @@
-<h2 class="mb-3">Create a new event</h2>
+<h2 class="mb-3 mt-2">Create a new event</h2>
 
 <form action="/event/create" method="POST" enctype="multipart/form-data" class="form-group">
-  <label for="input-name">Event Name</label>
+  <label for="input-name" class="text-grey">Event Name</label>
   <input class="form-control mb-2" type="text" id="input-name" name="name" placeholder="Event Name" />
 
-  <label for="input-Location">Location</label>
+  <label for="input-Location" class="text-grey">Location</label>
   <input class="form-control mb-2" type="text" id="input-location" name="location" placeholder="Event Location" />
 
-  <label for="input-description">Description</label>
+  <label for="input-description" class="text-grey">Description</label>
   <input class="form-control mb-2" type="text" name="description" id="input-description" placeholder="Event Description" />
 
-    <label for="input-file">Image</label>
+    <label for="input-file" class="text-grey">Image</label>
 <div class="input-group mb-2">
   <div class="custom-file">
     <input type="file" class="custom-file-input" id="inputGroupFile02" name="image" placeholder="Event Image">
     <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
   </div>
 </div>
+    <p class="lead mb-2">If you don't add an image, one will be added randomly to your event.</p>
 
-      <label for="input-date">Possible dates</label>
+<div>
+      <label for="input-date" class="text-grey">Possible dates</label>
   <div id="inputFormRow">
     <div class="input-group input-date-div mb-3">
-      <input type="date" id="input-date" name="date[]" class="form-control m-input">
+      <input type="date" id="input-date" name="date[]" class="form-control">
       <div class="input-group-append">                
         <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
       </div>
     </div>
   </div>
+  </div>
   <div id="newRow"></div>
   <div>
-  <button id="addRow" type="button" class="btn btn-info"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <button id="addRow" type="button" class="btn orange text-white"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-plus-fill mb-1 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM0 5h16v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5zm8.5 3.5a.5.5 0 0 0-1 0V10H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V11H10a.5.5 0 0 0 0-1H8.5V8.5z"/>
 </svg> Add another date</button>
   </div>
 
   <button class="btn btn-outline-dark mt-3">Create Event</button>
+
 </form>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

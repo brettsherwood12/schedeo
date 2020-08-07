@@ -4,12 +4,12 @@
 {{#if events}}
   <div class="container mt-3">
     {{#each events}}
-    <a href="/event/{{ _id }}">
+    <a href="/event/{{ _id }}" style="text-decoration : none">
       <article class="jumbotron">
         <div>
             <h2 class="text-white">{{ name }}</h2>
-            <span class="text-muted mb-2">Location: {{ location }}</span>
-            <p class="lead description text-white">Description: {{ description }}</p>
+            <span class="text-muted mb-2 location">Location: {{ location }}</span>
+            <p class="description text-white" style="font-size: 1.2em;">Description: {{ description }}</p>
         </div>
             <img src="{{ pictureUrl }}" alt="" class="img-fluid rounded home-image float-right">
       </article>

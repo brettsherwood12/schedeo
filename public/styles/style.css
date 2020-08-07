@@ -11,9 +11,8 @@ body {
   background-color: #eee;
   color: white; }
 
-.description {
-  color: white;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.logo {
+  max-width: 6em; }
 
 .white {
   background-color: #dce0e4; }
@@ -21,20 +20,25 @@ body {
 .dark-grey {
   background-color: #343a40; }
 
+.text-grey {
+  color: #343a40; }
+
 .text-white {
   color: white; }
+
+.orange {
+  background-color: #f19603; }
+
+.text-orange {
+  color: #f19603; }
 
 .lead {
   font-size: 1em;
   color: #343a40; }
 
-a,
-a:hover,
-a:active,
-a:visited,
-a:focus {
-  text-decoration: none;
-  color: #343a40; }
+#all-events-link,
+#my-events-link {
+  border: none; }
 
 nav a {
   margin-right: 1em; }
@@ -73,6 +77,18 @@ article .description {
   margin-bottom: 0.5em;
   background-color: #343a40; }
 
+.jumbotron-home {
+  padding: 1em;
+  margin-bottom: 0.5em;
+  background-color: #343a40; }
+  .jumbotron-home a,
+  .jumbotron-home a:hover,
+  .jumbotron-home a:active,
+  .jumbotron-home a:visited,
+  .jumbotron-home a:focus {
+    text-decoration: none;
+    color: #343a40; }
+
 nav button {
   margin: auto 0; }
 
@@ -81,16 +97,17 @@ article {
   justify-content: space-between; }
 
 .delete-btn {
-  font-size: 0.5em;
-  padding: 0.5em;
+  font-size: 0.7em;
+  padding: 0.7em;
   display: flex;
-  align-self: flex-end; }
+  align-self: flex-end;
+  border: none; }
 
 .event-image {
   max-width: 20rem; }
 
 .home-image {
-  max-height: 5em; }
+  max-height: 8em; }
 
 .comment-image {
   max-width: 30em; }
@@ -111,13 +128,37 @@ textarea {
 
 .dates {
   margin-bottom: 0;
-  color: white; }
+  color: #343a40; }
+
+.alert {
+  border: solid 1px #343a40;
+  border-radius: 1px; }
 
 .comment {
   color: white; }
 
 .event-name {
   color: white; }
+
+.name {
+  text-decoration: underline;
+  -webkit-text-decoration-color: #f19603;
+  /* safari still uses vendor prefix */
+  text-decoration-color: #f19603; }
+
+.description {
+  color: white; }
+
+.no-decoration a,
+.no-decoration a:hover,
+.no-decoration a:active,
+.no-decoration a:visited,
+.no-decoration a:focus {
+  text-decoration: none;
+  color: #343a40; }
+
+.location {
+  font-size: 1em; }
 
 /* Customize the label (the container) */
 .container-date {
@@ -146,7 +187,8 @@ textarea {
   left: 0;
   height: 1em;
   width: 1em;
-  background-color: white; }
+  background-color: white;
+  border: solid 1px #343a40; }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
