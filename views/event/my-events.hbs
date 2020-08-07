@@ -10,7 +10,7 @@
             <h2>{{ name }}</h2>
             </a>
     <form method="POST" action="/event/{{ _id }}/delete">
-      <button class="badge badge-danger">Delete Event</button>
+      <button class="badge badge-danger delete-btn align-self-start">Delete Event</button>
     </form>
     <a href="/event/{{ _id }}">
             <span class="text-muted mb-2">Location: {{ location }}</span>
@@ -34,3 +34,7 @@
 {{else}}
 {{> home }}
 {{/if}}
+<script>
+  let currentLink = document.getElementById('my-events-link')
+  currentLink.style.backgroundColor = "#77A6F7"
+</script>

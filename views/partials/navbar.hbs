@@ -1,7 +1,19 @@
-  <nav class="navbar navbar-light">
+  {{!-- <nav class="navbar navbar-light">
     <div class="align-self-start">
-    <a href="/">All events</a>
-    <a href="/event/myevents">My events</a>
+    <a id="all-events-link" class="btn btn-light" href="/">All events</a>
+    <a id="my-events-link" class="btn btn-light" href="/event/myevents">My events</a>
     </div>
     <a href="/event/create" class="btn btn-secondary" id="create">Create a new event</a>
+  </nav> --}}
+
+  <nav class="nav nav-pills">
+    <li class="nav-link">
+      <a id="all-events-link" class="btn btn-light" href="/">All events</a>
+    </li>
+    <li class="nav-link">
+      <a id="my-events-link" class="btn btn-light" href="/event/myevents">My events</a>
+    </li class="nav-link">
+    <li>
+      <a href="/event/create" class="btn btn-secondary" id="create">Create a new event</a>
+    </li class="nav-link">
   </nav>
