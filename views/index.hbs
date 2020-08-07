@@ -7,9 +7,9 @@
     <a href="/event/{{ _id }}">
       <article class="jumbotron">
         <div>
-            <h2>{{ name }}</h2>
+            <h2 class="text-white">{{ name }}</h2>
             <span class="text-muted mb-2">Location: {{ location }}</span>
-            <p class="lead description">Description: {{ description }}</p>
+            <p class="lead description text-white">Description: {{ description }}</p>
         </div>
             <img src="{{ pictureUrl }}" alt="" class="img-fluid rounded home-image float-right">
       </article>
@@ -32,5 +32,6 @@
 {{/if}}
 <script>
   let currentLink = document.getElementById('all-events-link')
-  currentLink.style.backgroundColor = "#77A6F7"
+  currentLink.style.backgroundColor = "#343A40"
+  currentLink.style.color = "white"
 </script>

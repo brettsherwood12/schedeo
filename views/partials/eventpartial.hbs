@@ -1,17 +1,25 @@
-<div class="container mt-2 jumbotron">
+<div class="container mt-2 jumbotron light-blue">
   <span class="text-muted">Event by: {{ event.creator.name }}</span>
   <div class="row mt-2">
     <div class="col">
-    <h2>{{ event.name }}</h2>
+    <h2 class="event-name">{{ event.name }}</h2>
     <span class="text-muted mb-2">Location: {{ event.location }}</span>
-    <p class="lead description">Description: {{ event.description }}</p>
-    <p><a href="/event/{{ event._id }}/tasks">View tasks</a></p>
+    <p class="description mb-3">Description: {{ event.description }}</p>
+    <p><a class="btn btn-outline-light mb-2" href="/event/{{ event._id }}/tasks"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list-task" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+  <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+  <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+</svg> View tasks</a></p>
     <p>
-    <a href="/event/{{ event._id }}/availability">View availabilities</a>
+    <a class="btn btn-outline-light" href="/event/{{ event._id }}/availability"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+  <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+  <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
+</svg> View availabilities</a>
     </p>
     </div>
     <div class="col">
-    <img src="{{ event.pictureUrl }}" alt="{{ event.name }}" class="img-fluid rounded float-right event-image">
+    <img src="{{ event.pictureUrl }}" alt="{{ event.name }}" class="img-fluid rounded float-right">
     </div>
   </div>
 </div>

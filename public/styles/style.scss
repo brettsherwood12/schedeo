@@ -16,6 +16,30 @@ body {
   font-family: sans-serif;
   font-family: $font-sans;
   line-height: 2;
+  background-color: #eee;
+  color: white;
+}
+
+.description {
+  color: white;
+  font-family: $font-sans;
+}
+
+.white {
+  background-color: #dce0e4;
+}
+
+.dark-grey {
+  background-color: #343a40;
+}
+
+.text-white {
+  color: white;
+}
+
+.lead {
+  font-size: 1em;
+  color: #343a40;
 }
 
 a,
@@ -24,7 +48,7 @@ a:active,
 a:visited,
 a:focus {
   text-decoration: none;
-  color: inherit;
+  color: #343a40;
 }
 
 nav {
@@ -39,6 +63,7 @@ h3,
 p {
   margin: 0;
   line-height: inherit;
+  color: #343a40;
 }
 
 form {
@@ -64,9 +89,26 @@ article {
   }
 }
 
+.gradient {
+  background-color: #343a40;
+  // background: rgb(124, 166, 212);
+  // background: linear-gradient(
+  //   335deg,
+  //   rgba(124, 166, 212, 1) 0%,
+  //   rgba(166, 203, 242, 1) 100%
+  // );
+}
+
 .jumbotron {
   padding: 1em;
   margin-bottom: 0.5em;
+  background-color: #343a40;
+  // background: rgb(124, 166, 212);
+  // background: linear-gradient(
+  //   335deg,
+  //   rgba(124, 166, 212, 1) 0%,
+  //   rgba(166, 203, 242, 1) 100%
+  // );
 }
 
 nav {
@@ -112,9 +154,23 @@ textarea {
   max-width: 18em;
 }
 
+.btn-success {
+  background-color: #73aae6;
+  border: none;
+  color: #4c545b;
+}
+
 .dates {
-  font-size: 1.2em;
   margin-bottom: 0;
+  color: white;
+}
+
+.comment {
+  color: white;
+}
+
+.event-name {
+  color: white;
 }
 
 /* Customize the label (the container) */
@@ -123,7 +179,7 @@ textarea {
   position: relative;
   padding-left: 35px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -144,14 +200,9 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 1em;
+  width: 1em;
   background-color: white;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -173,8 +224,8 @@ textarea {
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 9px;
-  top: 5px;
+  left: 6px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;

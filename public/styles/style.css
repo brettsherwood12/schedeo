@@ -7,7 +7,26 @@ body {
   margin: 0 auto;
   font-family: sans-serif;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 2; }
+  line-height: 2;
+  background-color: #eee;
+  color: white; }
+
+.description {
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.white {
+  background-color: #dce0e4; }
+
+.dark-grey {
+  background-color: #343a40; }
+
+.text-white {
+  color: white; }
+
+.lead {
+  font-size: 1em;
+  color: #343a40; }
 
 a,
 a:hover,
@@ -15,7 +34,7 @@ a:active,
 a:visited,
 a:focus {
   text-decoration: none;
-  color: inherit; }
+  color: #343a40; }
 
 nav a {
   margin-right: 1em; }
@@ -25,7 +44,8 @@ h2,
 h3,
 p {
   margin: 0;
-  line-height: inherit; }
+  line-height: inherit;
+  color: #343a40; }
 
 form {
   display: flex;
@@ -45,9 +65,13 @@ article span {
 article .description {
   font-size: 0.8em; }
 
+.gradient {
+  background-color: #343a40; }
+
 .jumbotron {
   padding: 1em;
-  margin-bottom: 0.5em; }
+  margin-bottom: 0.5em;
+  background-color: #343a40; }
 
 nav button {
   margin: auto 0; }
@@ -80,9 +104,20 @@ article {
 textarea {
   max-width: 18em; }
 
+.btn-success {
+  background-color: #73aae6;
+  border: none;
+  color: #4c545b; }
+
 .dates {
-  font-size: 1.2em;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  color: white; }
+
+.comment {
+  color: white; }
+
+.event-name {
+  color: white; }
 
 /* Customize the label (the container) */
 .container-date {
@@ -90,7 +125,7 @@ textarea {
   position: relative;
   padding-left: 35px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -109,13 +144,9 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 1em;
+  width: 1em;
   background-color: white; }
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc; }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
@@ -133,8 +164,8 @@ textarea {
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 9px;
-  top: 5px;
+  left: 6px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;
