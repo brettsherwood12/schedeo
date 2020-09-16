@@ -15,6 +15,7 @@ const hbs = require("hbs");
 const helperDate = require("helper-date");
 const helperJson = require("hbs-json");
 const bindUserToViewLocals = require("./middleware/bind-user-to-view-locals.js");
+const passportConfigure = require("./passport-configuration.js");
 const indexRouter = require("./routes/index");
 const eventRouter = require("./routes/event");
 const extrasRouter = require("./routes/extras");
