@@ -19,10 +19,6 @@ Routes
 - POST Create event
 - GET Single event
 
-Views
-
-Home - User sees list of events, and button to create new event. Event Creation - user sees form for creating event. Event
-
 User Model
 
 ```
