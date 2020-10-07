@@ -1,4 +1,4 @@
-# free-time
+# Schedeo
 
 Node.js event planning app
 
