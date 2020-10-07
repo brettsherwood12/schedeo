@@ -1,6 +1,11 @@
 # Schedeo
 
-Node.js event planning app
+Event planning MVC app, key feature is the ability of users to vote on the date of an event. Handlebars
+templates rendered in Node with Express server. Authentication using Passport.js. MongoDB for persistent data,
+custom models defined with mongoose. Built with one other colleague using Git. Use the credentials below if you
+don't want to make an account.
+&check; Browser 
+&check; Mobile
 
 Models
 
